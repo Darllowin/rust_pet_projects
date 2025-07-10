@@ -1,0 +1,15 @@
+[package]
+name = "pet_projects"
+version = "0.1.0"
+edition = "2024"
+default-run = "pet_projects"
+
+[dependencies]
+
+[[bin]]
+name = "to_do_list"
+path = "src/bin/to_do_list.rs"
+
+[[bin]]
+name = "calculator"
+path = "src/bin/calculator.rs"
