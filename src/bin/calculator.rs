@@ -147,3 +147,56 @@ fn read_two_numbers() -> Result<(f64, f64), String> {
         return Ok((num1, num2));
     }
 }
+
+#[test]
+fn test_calculate_add() {
+    let op = Operation::Add;
+    let result = op.calculate(2.0, 3.0).unwrap();
+    assert_eq!(result, 5.0);
+}
+#[test]
+fn test_calculate_subtract() {
+    let op = Operation::Subtract;
+    let result = op.calculate(5.0, 3.0).unwrap();
+    assert_eq!(result, 2.0);
+}
+
+#[test]
+fn test_calculate_multiply() {
+    let op = Operation::Multiply;
+    let result = op.calculate(4.0, 2.5).unwrap();
+    assert_eq!(result, 10.0);
+}
+
+#[test]
+fn test_calculate_divide() {
+    let op = Operation::Divide;
+    let result = op.calculate(10.0, 2.0).unwrap();
+    assert_eq!(result, 5.0);
+}
+
+#[test]
+fn test_divide_by_zero() {
+    let op = Operation::Divide;
+    let result = op.calculate(10.0, 0.0);
+    assert!(result.is_err());
+    assert_eq!(
+        result.err().unwrap(),
+        "Ошибка: деление на ноль.".to_string()
+    );
+}
+
+#[test]
+fn test_calculate_exponentiation() {
+    let op = Operation::Exponentiation;
+    let result = op.calculate(2.0, 3.0).unwrap();
+    assert_eq!(result, 8.0);
+
+    // Проверка отрицательной степени
+    let result_neg = op.calculate(2.0, -2.0).unwrap();
+    assert!((result_neg - 0.25).abs() < 1e-10);
+
+    // Проверка нулевой степени
+    let result_zero = op.calculate(5.0, 0.0).unwrap();
+    assert_eq!(result_zero, 1.0);
+}
